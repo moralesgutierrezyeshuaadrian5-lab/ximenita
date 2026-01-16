@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Para mi corazoncitooo 💚</title>
+
+<style>
+body{
+    margin:0;
+    font-family: 'Dancing Script', cursive;
+    height:100vh;
+    overflow:hidden;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    /* FONDO FIJO */
+    background-image:
+        linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)),
+        url("xi.webp");
+    background-size:cover;
+    background-position:center;
+    background-attachment:fixed;
+}
+
+/* PANEL */
+.panel{
+    background:white;
+    padding:35px;
+    border-radius:30px;
+    box-shadow:0 20px 45px rgba(0,0,0,0.25);
+    width:360px;
+    text-align:center;
+    z-index:2;
+}
+
+h1{
+    color:#2e7d32;
+    margin-bottom:15px;
+}
+
+/* SOBRE */
+.note{
+    background:#e8f5e9;
+    padding:25px;
+    border-radius:18px;
+    cursor:pointer;
+    font-size:20px;
+    transition:all 0.3s;
+}
+.note:hover{
+    transform:scale(1.07);
+}
+
+/* CARTA */
+.card{
+    display:none;
+    margin-top:25px;
+    background:#c8e6c9;
+    padding:25px;
+    border-radius:22px;
+    font-size:22px;
+
+    height:180px;          /* tamaño fijo */
+    overflow-y:auto;       /* scroll interno */
+    line-height:1.4;
+    font-style: italic;    /* cursiva */
+    text-align: justify;
+}
+
+/* CONTROLES */
+.controls{
+    display:none;
+    margin-top:20px;
+}
+select,input{
+    margin-top:12px;
+    padding:9px;
+    border-radius:12px;
+    border:1px solid #aaa;
+    width:100%;
+    font-size:15px;
+}
+
+/* BURBUJAS */
+.bubble{
+    position:absolute;
+    bottom:-60px;
+    border-radius:50%;
+
+    background: radial-gradient(
+        circle at 30% 30%,
+        rgba(255,255,255,0.9),
+        rgba(255,255,255,0.4),
+        rgba(255,255,255,0.15),
+        rgba(255,255,255,0.05)
+    );
+
+    border: 1.5px solid rgba(255,255,255,0.6);
+    box-shadow:
+        inset -4px -4px 10px rgba(255,255,255,0.4),
+        inset 4px 4px 10px rgba(255,255,255,0.2),
+        0 0 12px rgba(255,255,255,0.3);
+
+    opacity:0.9;
+    animation: float 9s linear infinite;
+}
+
+@keyframes float{
+    from{ transform:translateY(0); }
+    to{ transform:translateY(-130vh); }
+}
+</style>
+</head>
+
+<body>
+
+<div class="panel">
+    <h1>Feliz Cumpleañooooos 🎂</h1>
+
+    <!-- SOBRE -->
+    <div class="note" onclick="abrirCarta()">
+        Ximenita 💌
+    </div>
+
+    <!-- CARTA -->
+    <div class="card" id="card"></div>
+
+    <!-- CONTROLES -->
+    <div class="controls" id="controls">
+        <label>
+            🎨
+            <input type="color" value="#000000" onchange="cambiarFondo(this.value)">
+        </label>
+
+        <label>
+            🫧 
+            <input type="color" value="#ffffff" onchange="colorBurbuja=this.value">
+        </label>
+
+        <label>
+            🎵 
+            <select onchange="irAYoutube(this.value)">
+                <option value="">— Selecciona unaaa —</option>
+                <option value="lana">Lana del Rey 💚</option>
+                <option value="cumple">Feliz Cumpleañooos 🎂</option>
+                <option value="carla">Carla Morrison 🌸</option>
+            </select>
+        </label>
+    </div>
+</div>
+
+<script>
+/* TEXTO ANIMADO */
+let texto = "Feliz cumpleaños mi corazoncitooooooooo, hoy celebramos tus 22 añitos de vidaaa. Desde el primer momento supe que quería estar contigo aquella mañana mientras esperábamos el camión entendí que eras muy especial. Amo pasar tiempo contigo, compartir risas, pláticas y cada instante a tu lado se vuelve muy especiaaal. Gracias por ser tú, por tu ternura y por iluminar mi vida. Deseo que este año te regale todo lo bueno que mereces y que yo pueda seguir celebrando cada uno de tus cumpleaños a tu lado. Te amo con todo mi corazón, hoy y siempre. FELIZ CUMPLEAÑOOOOOOOOOS, te amooooooooooooooooooo y te mando un abrazooooooo y muchos besitooooooooooooooooooos";
+let index = 0;
+
+/* BURBUJAS */
+let colorBurbuja = "#ffffff";
+
+function abrirCarta(){
+    document.querySelector('.note').style.display='none';
+    document.getElementById('card').style.display='block';
+    document.getElementById('controls').style.display='block';
+    escribirTexto();
+    setInterval(crearBurbuja,40);
+}
+
+function escribirTexto(){
+    if(index < texto.length){
+        document.getElementById('card').innerHTML += texto.charAt(index);
+        index++;
+        setTimeout(escribirTexto,60);
+    }
+}
+
+function crearBurbuja(){
+    let b = document.createElement('div');
+    let size = Math.random()*40 + 12;
+    b.className = 'bubble';
+    b.style.width = size+'px';
+    b.style.height = size+'px';
+    b.style.left = Math.random()*100+'vw';
+
+    b.style.borderColor = colorBurbuja;
+    b.style.boxShadow += `, 0 0 15px ${colorBurbuja}`;
+
+    document.body.appendChild(b);
+    setTimeout(()=>b.remove(),9000);
+}
+
+/* CAMBIAR FONDO SIN PERDER IMAGEN */
+function cambiarFondo(color){
+    document.body.style.backgroundImage =
+        `linear-gradient(${color}99, ${color}99), url("xi.webp")`;
+}
+
+function irAYoutube(op){
+    let url="";
+    if(op==='lana')
+        url='https://www.youtube.com/results?search_query=lana+del+rey+romantic+songs';
+    if(op==='cumple')
+        url='https://www.youtube.com/results?search_query=feliz+cumpleaños+romantico';
+    if(op==='carla')
+        url='https://www.youtube.com/results?search_query=carla+morrison+canciones+bonitas';
+    if(url) window.open(url,'_blank');
+}
+</script>
+
+</body>
+</html>
