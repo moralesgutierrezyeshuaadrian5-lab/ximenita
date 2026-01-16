@@ -2,7 +2,10 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Para mi corazoncitooooo </title>
+<title>Para mi corazoncitooooo</title>
+
+<!-- FUENTE CURSIVA -->
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
 
 <style>
 body{
@@ -61,10 +64,10 @@ h1{
     border-radius:22px;
     font-size:22px;
 
-    height:180px;          /* tamaño fijo */
-    overflow-y:auto;       /* scroll interno */
+    height:180px;
+    overflow-y:auto;
     line-height:1.4;
-    font-style: italic;    /* cursiva */
+    font-style: italic;
     text-align: justify;
 }
 
@@ -87,7 +90,6 @@ select,input{
     position:absolute;
     bottom:-60px;
     border-radius:50%;
-
     background: radial-gradient(
         circle at 30% 30%,
         rgba(255,255,255,0.9),
@@ -95,13 +97,11 @@ select,input{
         rgba(255,255,255,0.15),
         rgba(255,255,255,0.05)
     );
-
     border: 1.5px solid rgba(255,255,255,0.6);
     box-shadow:
         inset -4px -4px 10px rgba(255,255,255,0.4),
         inset 4px 4px 10px rgba(255,255,255,0.2),
         0 0 12px rgba(255,255,255,0.3);
-
     opacity:0.9;
     animation: float 9s linear infinite;
 }
@@ -128,27 +128,22 @@ select,input{
 
     <!-- CONTROLES -->
     <div class="controls" id="controls">
-        <label>
-            🎨
-            <input type="color" value="#000000" onchange="cambiarFondo(this.value)">
-        </label>
 
-        <label>
-            🫧 
-            <input type="color" value="#ffffff" onchange="colorBurbuja=this.value">
-        </label>
+        🎨
+        <input type="color" value="#000000" onchange="cambiarFondo(this.value)">
 
-        <label>
-            🎵 
-            <select onchange="irAYoutube(this.value)">
-                <option value="">— Selecciona unaaa —</option>
-                <option value=" FELIZ CUMPLEAÑOOOS "> FELIZ CUMPLEAÑOOOS </option>
-                <option value=" TE AMOOOOO  "> TE AMOOOOO </option>
-                <option value="  YAAA CASEMONOOOOOOOS  "> YAAA CASEMONOOOOOOOS </option>
-                <option value=" QUE FELIZ SOOOOOY  "> QUE FELIZ SOOOOOY </option>
-                <option value=" TE AMOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO  "> TE AMOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO </option>
-            </select>
-        </label>
+        🫧
+        <input type="color" value="#ffffff" onchange="colorBurbuja=this.value">
+
+        🎵
+        <select onchange="irAYoutube(this.value)">
+            <option value="">— Selecciona unaaa —</option>
+            <option value="feliz">FELIZ CUMPLEAÑOOOS</option>
+            <option value="amo">TE AMOOOOO</option>
+            <option value="casemonos">YAAA CASEMONOOOOOOOS</option>
+            <option value="felizsoy">QUE FELIZ SOOOOOY</option>
+            <option value="megaamo">TE AMOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO</option>
+        </select>
     </div>
 </div>
 
@@ -172,7 +167,7 @@ function escribirTexto(){
     if(index < texto.length){
         document.getElementById('card').innerHTML += texto.charAt(index);
         index++;
-        setTimeout(escribirTexto,60);
+        setTimeout(escribirTexto,40);
     }
 }
 
@@ -183,34 +178,27 @@ function crearBurbuja(){
     b.style.width = size+'px';
     b.style.height = size+'px';
     b.style.left = Math.random()*100+'vw';
-
     b.style.borderColor = colorBurbuja;
-    b.style.boxShadow += `, 0 0 15px ${colorBurbuja}`;
-
     document.body.appendChild(b);
     setTimeout(()=>b.remove(),9000);
 }
 
-/* CAMBIAR FONDO SIN PERDER IMAGEN */
+/* CAMBIAR FONDO */
 function cambiarFondo(color){
     document.body.style.backgroundImage =
         `linear-gradient(${color}99, ${color}99), url("xi.webp")`;
 }
 
+/* YOUTUBE */
 function irAYoutube(op){
-    let url="";
-    if(op==='FELIZ CUMPLEAÑOOOS')
-        url='https://www.youtube.com/watch?v=24NZLAiDYcA';
-    if(op==='TE AMOOOOO')
-        url='https://www.youtube.com/watch?v=ljArIjz_W3Q&list=RDljArIjz_W3Q&start_radio=1';
-    if(op==='YAAA CASEMONOOOOOOOS')
-        url='https://www.youtube.com/watch?v=sZpJ_4lj0y8&list=RDsZpJ_4lj0y8&start_radio=1';
-    if(op==='QUE FELIZ SOOOOOY')
-        url='https://www.youtube.com/watch?v=NalAUliVsp0&list=RDNalAUliVsp0&start_radio=1';
-    if(op==='TE AMOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO')
-        url='https://www.youtube.com/watch?v=vdGkKoe8bRI&list=RDvdGkKoe8bRI&start_radio=1';
-    
-    if(url) window.open(url,'_blank');
+    const links = {
+        feliz: "https://www.youtube.com/watch?v=24NZLAiDYcA",
+        amo: "https://www.youtube.com/watch?v=ljArIjz_W3Q",
+        casemonos: "https://www.youtube.com/watch?v=sZpJ_4lj0y8",
+        felizsoy: "https://www.youtube.com/watch?v=NalAUliVsp0",
+        megaamo: "https://www.youtube.com/watch?v=vdGkKoe8bRI"
+    };
+    if(links[op]) window.open(links[op], "_blank");
 }
 </script>
 
